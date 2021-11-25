@@ -88,7 +88,7 @@ void EmptyLinkFunctionForGeneratedCodeSProjectileWeapon() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ASProjectileWeapon, 3955409448);
+	IMPLEMENT_CLASS(ASProjectileWeapon, 1045070870);
 	template<> SHOOTERSTARTER_API UClass* StaticClass<ASProjectileWeapon>()
 	{
 		return ASProjectileWeapon::StaticClass();

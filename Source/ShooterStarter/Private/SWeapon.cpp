@@ -96,6 +96,15 @@ void ASWeapon::PlayFireEffect(FVector TracerEndPoint) {
 			TracerComp->SetVectorParameter(TracerTargetName, TracerEndPoint);
 		}
 	}
+
+	APawn* MyOwner = Cast<APawn>(GetOwner());
+	if (MyOwner) {
+		// cast to APlayerController; GetContoller is AController*
+		APlayerController* PC = Cast<APlayerController>(MyOwner->GetController());
+		if (PC) {
+			PC->ClientStartCameraShake(FireCamShake);
+		}
+	}
 }
 
 

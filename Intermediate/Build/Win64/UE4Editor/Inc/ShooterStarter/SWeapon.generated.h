@@ -76,7 +76,8 @@ public: \
 	FORCEINLINE static uint32 __PPO__TracerTargetName() { return STRUCT_OFFSET(ASWeapon, TracerTargetName); } \
 	FORCEINLINE static uint32 __PPO__MuzzleEffect() { return STRUCT_OFFSET(ASWeapon, MuzzleEffect); } \
 	FORCEINLINE static uint32 __PPO__ImpactEffect() { return STRUCT_OFFSET(ASWeapon, ImpactEffect); } \
-	FORCEINLINE static uint32 __PPO__TracerEffect() { return STRUCT_OFFSET(ASWeapon, TracerEffect); }
+	FORCEINLINE static uint32 __PPO__TracerEffect() { return STRUCT_OFFSET(ASWeapon, TracerEffect); } \
+	FORCEINLINE static uint32 __PPO__FireCamShake() { return STRUCT_OFFSET(ASWeapon, FireCamShake); }
 
 
 #define ShooterStarter_Source_ShooterStarter_Public_SWeapon_h_13_PROLOG
