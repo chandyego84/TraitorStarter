@@ -6,8 +6,10 @@
 #include "GameFramework/Character.h"
 #include "SCharacter.generated.h"
 
+
 class UCameraComponent;
 class USpringArmComponent;
+class ASWeapon;
 
 UCLASS()
 class SHOOTERSTARTER_API ASCharacter : public ACharacter
@@ -50,6 +52,14 @@ protected:
 	void BeginADS(); 
 	void StopADS();
 
+	ASWeapon* CurrentWeapon;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player")
+	TSubclassOf<ASWeapon>StarterWeaponClass;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Player")
+	FName WeaponAttachSocketName;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -59,4 +69,8 @@ public:
 
 	// overriding GetPawnView location-->have it use camera instead of pawn location
 	virtual FVector GetPawnViewLocation() const override;
+
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	void Fire();
+
 };

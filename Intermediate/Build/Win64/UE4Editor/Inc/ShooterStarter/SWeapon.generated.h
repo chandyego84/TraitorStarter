@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FVector;
 #ifdef SHOOTERSTARTER_SWeapon_generated_h
 #error "SWeapon.generated.h already included, missing '#pragma once' in SWeapon.h"
 #endif
@@ -16,12 +17,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define ShooterStarter_Source_ShooterStarter_Public_SWeapon_h_16_SPARSE_DATA
 #define ShooterStarter_Source_ShooterStarter_Public_SWeapon_h_16_RPC_WRAPPERS \
  \
-	DECLARE_FUNCTION(execFire);
+	DECLARE_FUNCTION(execFire); \
+	DECLARE_FUNCTION(execPlayFireEffect);
 
 
 #define ShooterStarter_Source_ShooterStarter_Public_SWeapon_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execFire);
+	DECLARE_FUNCTION(execFire); \
+	DECLARE_FUNCTION(execPlayFireEffect);
 
 
 #define ShooterStarter_Source_ShooterStarter_Public_SWeapon_h_16_INCLASS_NO_PURE_DECLS \

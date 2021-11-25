@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
+#include "SWeapon.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -27,6 +28,8 @@ ASCharacter::ASCharacter()
 	// for ADS
 	zoomFOV = 65.0f;
 	ZoomInterpSpeed = 20.0f;
+
+	WeaponAttachSocketName = "WeaponSocket";
 }
 
 // Called when the game starts or when spawned
@@ -35,6 +38,19 @@ void ASCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 	defaultFOV = CameraComp->FieldOfView;
+
+	// spawn default weapon
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	CurrentWeapon = GetWorld()->SpawnActor<ASWeapon>(StarterWeaponClass,
+		FVector::ZeroVector, FRotator::ZeroRotator);
+	if (CurrentWeapon) {
+		CurrentWeapon->SetOwner(this);
+		CurrentWeapon->AttachToComponent(GetMesh(),
+			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+			WeaponAttachSocketName);
+	}
 }
 
 // WASD movement
@@ -63,6 +79,13 @@ void ASCharacter::BeginADS() {
 void ASCharacter::StopADS() {
 	isZooming = false;
 }
+
+void ASCharacter::Fire() {
+	if (CurrentWeapon) {
+		// has to be public
+		CurrentWeapon->Fire();
+	}
+} 
 
 // Called every frame
 void ASCharacter::Tick(float DeltaTime)
@@ -100,6 +123,9 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	// ADS
 	PlayerInputComponent->BindAction("ADS", IE_Pressed, this, &ASCharacter::BeginADS);
 	PlayerInputComponent->BindAction("ADS", IE_Released, this, &ASCharacter::StopADS);
+
+	// Firing
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASCharacter::Fire);
 }
 
 // used in get actor eye's viewpoint fxn in fire()

@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeSWeapon() {}
 	SHOOTERSTARTER_API UClass* Z_Construct_UClass_ASWeapon();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_ShooterStarter();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	ENGINE_API UClass* Z_Construct_UClass_UDamageType_NoRegister();
@@ -29,11 +30,20 @@ void EmptyLinkFunctionForGeneratedCodeSWeapon() {}
 		P_THIS->Fire();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(ASWeapon::execPlayFireEffect)
+	{
+		P_GET_STRUCT(FVector,Z_Param_TracerEndPoint);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->PlayFireEffect(Z_Param_TracerEndPoint);
+		P_NATIVE_END;
+	}
 	void ASWeapon::StaticRegisterNativesASWeapon()
 	{
 		UClass* Class = ASWeapon::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "Fire", &ASWeapon::execFire },
+			{ "PlayFireEffect", &ASWeapon::execPlayFireEffect },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -47,16 +57,51 @@ void EmptyLinkFunctionForGeneratedCodeSWeapon() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ASWeapon_Fire_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Weapon" },
+		{ "Comment", "// Called every frame\n//virtual void Tick(float DeltaTime) override;\n" },
 		{ "ModuleRelativePath", "Public/SWeapon.h" },
+		{ "ToolTip", "Called every frame\nvirtual void Tick(float DeltaTime) override;" },
 	};
 #endif
-	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ASWeapon_Fire_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASWeapon, nullptr, "Fire", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080400, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ASWeapon_Fire_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ASWeapon_Fire_Statics::Function_MetaDataParams)) };
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ASWeapon_Fire_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASWeapon, nullptr, "Fire", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020400, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ASWeapon_Fire_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ASWeapon_Fire_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_ASWeapon_Fire()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ASWeapon_Fire_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics
+	{
+		struct SWeapon_eventPlayFireEffect_Parms
+		{
+			FVector TracerEndPoint;
+		};
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_TracerEndPoint;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::NewProp_TracerEndPoint = { "TracerEndPoint", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(SWeapon_eventPlayFireEffect_Parms, TracerEndPoint), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::NewProp_TracerEndPoint,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Public/SWeapon.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASWeapon, nullptr, "PlayFireEffect", nullptr, nullptr, sizeof(SWeapon_eventPlayFireEffect_Parms), Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04880401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ASWeapon_PlayFireEffect()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ASWeapon_PlayFireEffect_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -108,7 +153,8 @@ void EmptyLinkFunctionForGeneratedCodeSWeapon() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_ShooterStarter,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_ASWeapon_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_ASWeapon_Fire, "Fire" }, // 967802320
+		{ &Z_Construct_UFunction_ASWeapon_Fire, "Fire" }, // 1014455263
+		{ &Z_Construct_UFunction_ASWeapon_PlayFireEffect, "PlayFireEffect" }, // 3091666614
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASWeapon_Statics::Class_MetaDataParams[] = {
@@ -119,8 +165,10 @@ void EmptyLinkFunctionForGeneratedCodeSWeapon() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASWeapon_Statics::NewProp_MeshComp_MetaData[] = {
 		{ "Category", "Components" },
+		{ "Comment", "// Called when the game starts or when spawned\n//virtual void BeginPlay() override;\n" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/SWeapon.h" },
+		{ "ToolTip", "Called when the game starts or when spawned\nvirtual void BeginPlay() override;" },
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASWeapon_Statics::NewProp_MeshComp = { "MeshComp", nullptr, (EPropertyFlags)0x00200800000a001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ASWeapon, MeshComp), Z_Construct_UClass_USkeletalMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ASWeapon_Statics::NewProp_MeshComp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASWeapon_Statics::NewProp_MeshComp_MetaData)) };
@@ -202,7 +250,7 @@ void EmptyLinkFunctionForGeneratedCodeSWeapon() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ASWeapon, 592441289);
+	IMPLEMENT_CLASS(ASWeapon, 2658681667);
 	template<> SHOOTERSTARTER_API UClass* StaticClass<ASWeapon>()
 	{
 		return ASWeapon::StaticClass();

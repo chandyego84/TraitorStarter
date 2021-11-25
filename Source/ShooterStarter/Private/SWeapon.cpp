@@ -19,7 +19,7 @@ FAutoConsoleVariableRef CVARDebugWeaponDrawing(TEXT("SHOOTER.DebugWeapons"),
 ASWeapon::ASWeapon()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	//PrimaryActorTick.bCanEverTick = true;
 
 	MeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComp"));
 	RootComponent = MeshComp;
@@ -28,12 +28,12 @@ ASWeapon::ASWeapon()
 	TracerTargetName = "Target";
 }
 
-// Called when the game starts or when spawned
-void ASWeapon::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
+//// Called when the game starts or when spawned
+//void ASWeapon::BeginPlay()
+//{
+//	Super::BeginPlay();
+//	
+//}
 
 void ASWeapon::Fire() {
 	// Trace the world from pawn eyes to crosshair location
@@ -77,25 +77,32 @@ void ASWeapon::Fire() {
 			DrawDebugLine(GetWorld(), EyeLocation, TraceEnd, FColor::Green, false, 1.0f, 0, 10.0f);
 		}
 
-		if (MuzzleEffect) {
-			UGameplayStatics::SpawnEmitterAttached(MuzzleEffect, MeshComp, MuzzleSocketName);
-		}
+		// Muzzle/Tracer Effects
+		PlayFireEffect(TracerEndPoint);
+		
+	}
+}
 
-		if (TracerEffect) {
-			FVector MuzzleLocation = MeshComp->GetSocketLocation(MuzzleSocketName);
+void ASWeapon::PlayFireEffect(FVector TracerEndPoint) {
+	if (MuzzleEffect) {
+		UGameplayStatics::SpawnEmitterAttached(MuzzleEffect, MeshComp, MuzzleSocketName);
+	}
 
-			UParticleSystemComponent* TracerComp = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TracerEffect, MuzzleLocation);
-			if (TracerComp) {
-				TracerComp->SetVectorParameter(TracerTargetName, TracerEndPoint);
-			}
+	if (TracerEffect) {
+		FVector MuzzleLocation = MeshComp->GetSocketLocation(MuzzleSocketName);
+
+		UParticleSystemComponent* TracerComp = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TracerEffect, MuzzleLocation);
+		if (TracerComp) {
+			TracerComp->SetVectorParameter(TracerTargetName, TracerEndPoint);
 		}
 	}
 }
 
-// Called every frame
-void ASWeapon::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
-}
+//// Called every frame
+//void ASWeapon::Tick(float DeltaTime)
+//{
+//	Super::Tick(DeltaTime);
+//
+//}
 
