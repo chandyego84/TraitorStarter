@@ -23,6 +23,10 @@ ASCharacter::ASCharacter()
 
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanJump = true;
+
+	// for ADS
+	zoomFOV = 65.0f;
+	ZoomInterpSpeed = 20.0f;
 }
 
 // Called when the game starts or when spawned
@@ -30,6 +34,7 @@ void ASCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	defaultFOV = CameraComp->FieldOfView;
 }
 
 // WASD movement
@@ -50,11 +55,26 @@ void ASCharacter::EndCrouch() {
 	UnCrouch();
 }
 
+// ADS
+void ASCharacter::BeginADS() {
+	isZooming = true;
+}
+
+void ASCharacter::StopADS() {
+	isZooming = false;
+}
+
 // Called every frame
 void ASCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	float targetFOV = isZooming ? zoomFOV : defaultFOV;
+
+	// adjust ADS speed
+	float newFOV = FMath::FInterpTo(CameraComp->FieldOfView, targetFOV, DeltaTime, ZoomInterpSpeed);
+
+	CameraComp->SetFieldOfView(newFOV);
 }
 
 // Called to bind functionality to input
@@ -76,6 +96,10 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 	// Jumping
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+
+	// ADS
+	PlayerInputComponent->BindAction("ADS", IE_Pressed, this, &ASCharacter::BeginADS);
+	PlayerInputComponent->BindAction("ADS", IE_Released, this, &ASCharacter::StopADS);
 }
 
 // used in get actor eye's viewpoint fxn in fire()
