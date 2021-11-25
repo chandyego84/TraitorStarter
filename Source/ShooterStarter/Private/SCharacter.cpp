@@ -84,6 +84,6 @@ FVector ASCharacter::GetPawnViewLocation() const {
 		return CameraComp->GetComponentLocation();
 	}
 
-	// else: calls original implementation
+	// else: calls original implementation [get viewpoint from PAWN eyes]
 	return Super::GetPawnViewLocation();
 }
