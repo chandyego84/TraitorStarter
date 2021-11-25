@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "ShooterStarter",
+			"Path": "C:\\Users\\chand\\Documents\\Unreal Projects\\ShooterStarter\\Source\\ShooterStarter.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ShooterStarterEditor",
+			"Path": "C:\\Users\\chand\\Documents\\Unreal Projects\\ShooterStarter\\Source\\ShooterStarterEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

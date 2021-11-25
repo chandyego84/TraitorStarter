@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\ShooterStarter.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{84645A91-436F-47E9-91B7-64E1614DCF15}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\ShooterStarter.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\ShooterStarterEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{7D337D95-9B87-4250-8635-A2C001B69924}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\ShooterStarter">
+      <UniqueIdentifier>{50053685-7C52-443E-AAED-012538DE45CA}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\ShooterStarter\ShooterStarter.Build.cs">
+      <Filter>Source\ShooterStarter</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\ShooterStarter\ShooterStarter.cpp">
+      <Filter>Source\ShooterStarter</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShooterStarter\ShooterStarter.h">
+      <Filter>Source\ShooterStarter</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShooterStarter\ShooterStarterGameModeBase.cpp">
+      <Filter>Source\ShooterStarter</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShooterStarter\ShooterStarterGameModeBase.h">
+      <Filter>Source\ShooterStarter</Filter>
+    </ClInclude>
+    <Filter Include="Source\ShooterStarter\Private">
+      <UniqueIdentifier>{E2ACC842-CE30-4ACA-A184-A739DF38D5F4}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\ShooterStarter\Private\SCharacter.cpp">
+      <Filter>Source\ShooterStarter\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ShooterStarter\Private\SProjectileWeapon.cpp">
+      <Filter>Source\ShooterStarter\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ShooterStarter\Private\SWeapon.cpp">
+      <Filter>Source\ShooterStarter\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\ShooterStarter\Public">
+      <UniqueIdentifier>{7ED2E93D-1D75-4E75-8D7B-45A50CF2BF16}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\ShooterStarter\Public\SCharacter.h">
+      <Filter>Source\ShooterStarter\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ShooterStarter\Public\SProjectileWeapon.h">
+      <Filter>Source\ShooterStarter\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ShooterStarter\Public\SWeapon.h">
+      <Filter>Source\ShooterStarter\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

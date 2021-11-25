@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\chand\\Documents\\Unreal Projects\\ShooterStarter\\Source\\ShooterStarter\\ShooterStarter.Build.cs",
+		"C:\\Users\\chand\\Documents\\Unreal Projects\\ShooterStarter\\Source\\ShooterStarter.Target.cs",
+		"C:\\Users\\chand\\Documents\\Unreal Projects\\ShooterStarter\\Source\\ShooterStarterEditor.Target.cs"
+	],
+	"EngineVersion": "4.27.1"
+}
