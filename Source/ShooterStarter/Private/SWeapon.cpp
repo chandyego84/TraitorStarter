@@ -7,6 +7,13 @@
 #include "Particles/ParticleSystem.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
+
+/*for surface types being fired at*/
+#define SURFACE_FLESHDEFAULT SurfaceType1
+#define SURFACE_FLESHVULNERABLE SurfaceType2
+/*for custom collision channel*/
+#define COLLISION_WEAPON ECC_GameTraceChannel1
 
 /*used for drawing debug line only if called in console*/
 static int32 DebugWeaponDrawing = 0;
@@ -53,21 +60,36 @@ void ASWeapon::Fire() {
 		QueryParams.AddIgnoredActor(MyOwner);
 		QueryParams.AddIgnoredActor(this);
 		QueryParams.bTraceComplex = true; // gives exact result of where we hit something
+		QueryParams.bReturnPhysicalMaterial = true;
 
 		// Particle "Target" parameter
 		FVector TracerEndPoint = TraceEnd;
 
 		FHitResult Hit; // struct - filled w/ data about what we're hitting
 		// returns boolean (if we hit something -- blocking hit)
-		if (GetWorld()->LineTraceSingleByChannel(Hit, EyeLocation, TraceEnd, ECC_Visibility, QueryParams)) {
+		if (GetWorld()->LineTraceSingleByChannel(Hit, EyeLocation, TraceEnd, COLLISION_WEAPON, QueryParams)) {
 			// blocking hit -- process damage
 			AActor* HitActor = Hit.GetActor();
 
 			UGameplayStatics::ApplyPointDamage(HitActor, 20.0f, ShotDirection, Hit, MyOwner->GetInstigatorController(),
 				this, DamageType);
 
-			if (ImpactEffect) {
-				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
+			// get surface type of object hit (body/head/other)
+			EPhysicalSurface SurfaceType = UPhysicalMaterial::DetermineSurfaceType(Hit.PhysMaterial.Get());
+			UParticleSystem* SelectedEffect = nullptr;
+
+			switch (SurfaceType) {
+			case (SURFACE_FLESHDEFAULT):
+			case (SURFACE_FLESHVULNERABLE):
+				SelectedEffect = FleshImpactEffect;
+				break;
+			default:
+				SelectedEffect = DefaultImpactEffect;
+				break;
+			}
+
+			if (SelectedEffect) {
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), SelectedEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
 			}
 
 			TracerEndPoint = Hit.ImpactPoint;

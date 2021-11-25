@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeShooterStarter_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x94BF4B7C,
+				0x52A6B12B,
 				0xDA0E68BB,
 				METADATA_PARAMS(nullptr, 0)
 			};
