@@ -8,6 +8,13 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 
+/*used for drawing debug line only if called in console*/
+static int32 DebugWeaponDrawing = 0;
+FAutoConsoleVariableRef CVARDebugWeaponDrawing(TEXT("SHOOTER.DebugWeapons"), 
+	DebugWeaponDrawing, 
+	TEXT("Draw Debug Lines for Weapons"), 
+	ECVF_Cheat);
+
 // Sets default values
 ASWeapon::ASWeapon()
 {
@@ -66,8 +73,10 @@ void ASWeapon::Fire() {
 			TracerEndPoint = Hit.ImpactPoint;
 		}
 
-		DrawDebugLine(GetWorld(), EyeLocation, TraceEnd, FColor::Green, false, 1.0f, 0, 10.0f);
-		
+		if (DebugWeaponDrawing > 0) {
+			DrawDebugLine(GetWorld(), EyeLocation, TraceEnd, FColor::Green, false, 1.0f, 0, 10.0f);
+		}
+
 		if (MuzzleEffect) {
 			UGameplayStatics::SpawnEmitterAttached(MuzzleEffect, MeshComp, MuzzleSocketName);
 		}
