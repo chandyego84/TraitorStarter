@@ -30,6 +30,9 @@ ASCharacter::ASCharacter()
 	ZoomInterpSpeed = 20.0f;
 
 	WeaponAttachSocketName = "WeaponSocket";
+
+	// AMMO 
+	InitializeAmmo();
 }
 
 // Called when the game starts or when spawned
@@ -80,10 +83,27 @@ void ASCharacter::StopADS() {
 	isZooming = false;
 }
 
+// AMMO
+void ASCharacter::InitializeAmmo() {
+	AmmoTotal = 1;
+}
+
+bool ASCharacter::UseAmmo(const int32 NumUsed) {
+	AmmoTotal -= NumUsed;
+
+	return AmmoTotal > 0 ? true : false;
+}
+
+
 void ASCharacter::Fire() {
 	if (CurrentWeapon) {
-		// has to be public
-		CurrentWeapon->Fire();
+		// only if player has a weapon
+		// Fire() is public in Weapon class
+		if (UseAmmo(1)) {
+			// has ammo to shoot
+			CurrentWeapon->Fire();
+		}
+
 	}
 } 
 

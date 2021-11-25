@@ -60,6 +60,15 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Player")
 	FName WeaponAttachSocketName;
 
+	// AMMO 
+	UPROPERTY(EditDefaultsOnly, Category = "Ammo")
+		// uint32 does not work for blueprint access
+		int32 AmmoTotal; // int32 -> unsigned up to 32 bits (WOW, I ACTUALLY UNDERSTAND THANKS PARTLY TO EE214)
+
+	void InitializeAmmo();
+
+	bool UseAmmo(const int32 NumUsed);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
