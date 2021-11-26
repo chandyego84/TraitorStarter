@@ -35,4 +35,6 @@ void USHealthComponent::HandleTakeAnyDamage(AActor* DamagedActor, float Damage,
 
 	// output logs to show health updates
 	UE_LOG(LogTemp, Log, TEXT("Health Changed: %s"), *FString::SanitizeFloat(Health));
+
+	OnHealthChanged.Broadcast(this, Health, Damage, DamageType, InstigatedBy, DamageCauser);
 }
