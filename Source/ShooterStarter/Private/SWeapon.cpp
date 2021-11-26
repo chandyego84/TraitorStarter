@@ -49,7 +49,7 @@ void ASWeapon::Fire() {
 
 		FVector ShotDirection = EyeRotation.Vector();
 
-		FVector TraceEnd = EyeLocation + (ShotDirection * 100000);
+		FVector TraceEnd = EyeLocation + (ShotDirection * 100000); // ADD LOCATION, NOT MULTIPLY
 
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(MyOwner);
