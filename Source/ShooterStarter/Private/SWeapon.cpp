@@ -8,12 +8,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
-
-/*for surface types being fired at*/
-#define SURFACE_FLESHDEFAULT SurfaceType1
-#define SURFACE_FLESHVULNERABLE SurfaceType2
-/*for custom collision channel*/
-#define COLLISION_WEAPON ECC_GameTraceChannel1
+#include "ShooterStarter/ShooterStarter.h"
 
 /*used for drawing debug line only if called in console*/
 static int32 DebugWeaponDrawing = 0;
@@ -50,11 +45,11 @@ void ASWeapon::Fire() {
 		FVector EyeLocation;
 		FRotator EyeRotation;
 		// pass by reference
-		MyOwner->GetActorEyesViewPoint(EyeLocation, EyeRotation);
+		MyOwner->GetActorEyesViewPoint(EyeLocation, EyeRotation); 
 
 		FVector ShotDirection = EyeRotation.Vector();
 
-		FVector TraceEnd = EyeLocation * (EyeRotation.Vector() * 100000);
+		FVector TraceEnd = EyeLocation + (ShotDirection * 100000);
 
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(MyOwner);

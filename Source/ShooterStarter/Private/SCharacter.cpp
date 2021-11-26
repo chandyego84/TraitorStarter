@@ -2,9 +2,11 @@
 
 
 #include "SCharacter.h"
+#include "ShooterStarter/ShooterStarter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "SWeapon.h"
 
 // Sets default values
@@ -24,6 +26,8 @@ ASCharacter::ASCharacter()
 
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanJump = true;
+
+	GetCapsuleComponent()->SetCollisionResponseToChannel(COLLISION_WEAPON, ECR_Ignore);
 
 	// for ADS
 	zoomFOV = 65.0f;

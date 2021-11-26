@@ -8,14 +8,25 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AActor;
+class UDamageType;
+class AController;
 #ifdef SHOOTERSTARTER_SHealthComponent_generated_h
 #error "SHealthComponent.generated.h already included, missing '#pragma once' in SHealthComponent.h"
 #endif
 #define SHOOTERSTARTER_SHealthComponent_generated_h
 
 #define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_SPARSE_DATA
-#define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_RPC_WRAPPERS
-#define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_RPC_WRAPPERS_NO_PURE_DECLS
+#define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execHandleTakeAnyDamage);
+
+
+#define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execHandleTakeAnyDamage);
+
+
 #define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUSHealthComponent(); \
@@ -59,7 +70,8 @@ public: \
 
 
 #define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_13_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(USHealthComponent, Health); }
+	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(USHealthComponent, Health); } \
+	FORCEINLINE static uint32 __PPO__DefaultHealth() { return STRUCT_OFFSET(USHealthComponent, DefaultHealth); }
 
 
 #define ShooterStarter_Source_ShooterStarter_Public_Components_SHealthComponent_h_10_PROLOG
