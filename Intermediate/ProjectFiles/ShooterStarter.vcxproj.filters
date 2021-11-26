@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\ShooterStarter.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{84645A91-436F-47E9-91B7-64E1614DCF15}</UniqueIdentifier>
+      <UniqueIdentifier>{5B0E765F-4160-4B04-ACCD-32BB207010A0}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\ShooterStarter.Target.cs">
       <Filter>Source</Filter>
@@ -11,8 +11,10 @@
     <None Include="..\..\Source\ShooterStarterEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{7D337D95-9B87-4250-8635-A2C001B69924}</UniqueIdentifier>
+      <UniqueIdentifier>{93004F9D-EC73-4C41-8703-30BD9E3C622A}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -27,7 +29,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\ShooterStarter">
-      <UniqueIdentifier>{50053685-7C52-443E-AAED-012538DE45CA}</UniqueIdentifier>
+      <UniqueIdentifier>{689E6EB0-30C4-4E48-8E67-EBA1C1CCBE48}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\ShooterStarter\ShooterStarter.Build.cs">
       <Filter>Source\ShooterStarter</Filter>
@@ -45,7 +47,7 @@
       <Filter>Source\ShooterStarter</Filter>
     </ClInclude>
     <Filter Include="Source\ShooterStarter\Private">
-      <UniqueIdentifier>{E2ACC842-CE30-4ACA-A184-A739DF38D5F4}</UniqueIdentifier>
+      <UniqueIdentifier>{51AAE23A-1A89-45C3-9721-96FB4758765C}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\ShooterStarter\Private\SCharacter.cpp">
       <Filter>Source\ShooterStarter\Private</Filter>
@@ -56,8 +58,14 @@
     <ClCompile Include="..\..\Source\ShooterStarter\Private\SWeapon.cpp">
       <Filter>Source\ShooterStarter\Private</Filter>
     </ClCompile>
+    <Filter Include="Source\ShooterStarter\Private\Components">
+      <UniqueIdentifier>{C2EDFF5D-E124-405D-8C6D-DC0D26C816AF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\ShooterStarter\Private\Components\SHealthComponent.cpp">
+      <Filter>Source\ShooterStarter\Private\Components</Filter>
+    </ClCompile>
     <Filter Include="Source\ShooterStarter\Public">
-      <UniqueIdentifier>{7ED2E93D-1D75-4E75-8D7B-45A50CF2BF16}</UniqueIdentifier>
+      <UniqueIdentifier>{8C861982-B415-4F20-96F6-E9AF268897A7}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\ShooterStarter\Public\SCharacter.h">
       <Filter>Source\ShooterStarter\Public</Filter>
@@ -67,6 +75,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\ShooterStarter\Public\SWeapon.h">
       <Filter>Source\ShooterStarter\Public</Filter>
+    </ClInclude>
+    <Filter Include="Source\ShooterStarter\Public\Components">
+      <UniqueIdentifier>{B444EAC3-F296-44EA-89F6-26BB174DEC9E}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\ShooterStarter\Public\Components\SHealthComponent.h">
+      <Filter>Source\ShooterStarter\Public\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
