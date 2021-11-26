@@ -8,6 +8,7 @@
 #include "GameFramework/PawnMovementComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "SWeapon.h"
+#include "Components/SHealthComponent.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -28,6 +29,9 @@ ASCharacter::ASCharacter()
 	GetMovementComponent()->GetNavAgentPropertiesRef().bCanJump = true;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(COLLISION_WEAPON, ECR_Ignore);
+
+	// health component
+	HealthComp = CreateDefaultSubobject<USHealthComponent>(TEXT("HealthComp"));
 
 	// for ADS
 	zoomFOV = 65.0f;
@@ -58,6 +62,9 @@ void ASCharacter::BeginPlay()
 			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
 			WeaponAttachSocketName);
 	}
+
+	// creating onhealthchanged fxn
+	HealthComp->OnHealthChanged.AddDynamic(this, &ASCharacter::OnHealthChanged);
 }
 
 // WASD movement
@@ -110,6 +117,18 @@ void ASCharacter::Fire() {
 
 	}
 } 
+
+void ASCharacter::OnHealthChanged(USHealthComponent* OwnerHealthComp, float Health, float HealthDelta,
+	const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser) {
+	if (Health <= 0.0f && !isDead) {
+		// "Die"
+		isDead = true;
+		GetMovementComponent()->StopMovementImmediately();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		
+	}
+}
 
 // Called every frame
 void ASCharacter::Tick(float DeltaTime)

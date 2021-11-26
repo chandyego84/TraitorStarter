@@ -10,6 +10,7 @@
 class UCameraComponent;
 class USpringArmComponent;
 class ASWeapon;
+class USHealthComponent;
 
 UCLASS()
 class SHOOTERSTARTER_API ASCharacter : public ACharacter
@@ -37,6 +38,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USpringArmComponent* SpringArmComp;
+
+	USHealthComponent* HealthComp;
 
 	// for ADS
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
@@ -68,6 +71,14 @@ protected:
 	void InitializeAmmo();
 
 	bool UseAmmo(const int32 NumUsed);
+
+	// HEALTH
+	UFUNCTION()
+		void OnHealthChanged(USHealthComponent* OwnerHealthComp, float Health, float HealthDelta,
+			const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Player")
+	bool isDead;
 
 public:	
 	// Called every frame

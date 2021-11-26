@@ -26,3 +26,5 @@ C:\Program Files\Epic Games\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\In
 C:\Program Files\Epic Games\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CapsuleComponent.generated.h
 C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Source\ShooterStarter\Public\SWeapon.h
 C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Intermediate\Build\Win64\UE4Editor\Inc\ShooterStarter\SWeapon.generated.h
+C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Source\ShooterStarter\Public\Components/SHealthComponent.h
+C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Intermediate\Build\Win64\UE4Editor\Inc\ShooterStarter\SHealthComponent.generated.h
