@@ -33,12 +33,15 @@ protected:
 	void BeginCrouch();
 	void EndCrouch();
 
+	/*CAMERA AND SPRINGARM COMP*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UCameraComponent* CameraComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USpringArmComponent* SpringArmComp;
 
+	// HEALTH COMP
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USHealthComponent* HealthComp;
 
 	// for ADS
