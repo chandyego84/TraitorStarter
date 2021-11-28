@@ -218,7 +218,7 @@ void EmptyLinkFunctionForGeneratedCodeSHealthComponent() {}
 		{ "ModuleRelativePath", "Public/Components/SHealthComponent.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_USHealthComponent_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0020080000000014, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(USHealthComponent, Health), METADATA_PARAMS(Z_Construct_UClass_USHealthComponent_Statics::NewProp_Health_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_USHealthComponent_Statics::NewProp_Health_MetaData)) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_USHealthComponent_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0020080000000034, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(USHealthComponent, Health), METADATA_PARAMS(Z_Construct_UClass_USHealthComponent_Statics::NewProp_Health_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_USHealthComponent_Statics::NewProp_Health_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_USHealthComponent_Statics::NewProp_DefaultHealth_MetaData[] = {
 		{ "Category", "HealthComponent" },
@@ -265,12 +265,22 @@ void EmptyLinkFunctionForGeneratedCodeSHealthComponent() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(USHealthComponent, 492742275);
+	IMPLEMENT_CLASS(USHealthComponent, 3708089330);
 	template<> SHOOTERSTARTER_API UClass* StaticClass<USHealthComponent>()
 	{
 		return USHealthComponent::StaticClass();
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_USHealthComponent(Z_Construct_UClass_USHealthComponent, &USHealthComponent::StaticClass, TEXT("/Script/ShooterStarter"), TEXT("USHealthComponent"), false, nullptr, nullptr, nullptr);
+
+	void USHealthComponent::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
+	{
+		static const FName Name_Health(TEXT("Health"));
+
+		const bool bIsValid = true
+			&& Name_Health == ClassReps[(int32)ENetFields_Private::Health].Property->GetFName();
+
+		checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in USHealthComponent"));
+	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(USHealthComponent);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #ifdef _MSC_VER
