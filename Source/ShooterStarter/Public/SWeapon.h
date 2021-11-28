@@ -10,6 +10,20 @@ class USkeletalMeshComponent;
 class UDamageType;
 class UParticleSystem;
 
+// info of hitscan weapon linetrace
+USTRUCT()
+struct FHitScanTrace {
+	GENERATED_BODY()
+
+public:
+	UPROPERTY()
+	TEnumAsByte<EPhysicalSurface> SurfaceType;
+
+	// not as detailed (netquantize)
+	UPROPERTY()
+	FVector_NetQuantize TraceEnd;
+};
+
 UCLASS()
 class SHOOTERSTARTER_API ASWeapon : public AActor
 {
@@ -28,6 +42,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	void PlayFireEffect(FVector TracerEndPoint);
+
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+	void PlayImpactEffects(EPhysicalSurface SurfaceType, FVector ImpactPoint);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	TSubclassOf<UDamageType> DamageType;
@@ -53,6 +70,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	TSubclassOf<UCameraShakeBase> FireCamShake;
 
+	UPROPERTY(ReplicatedUsing=OnRep_HitScanTrace)
+	FHitScanTrace HitScanTrace;
+
+	UFUNCTION()
+	void OnRep_HitScanTrace();
+
 public:	
 	// Called every frame
 	//virtual void Tick(float DeltaTime) override;
@@ -60,4 +83,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	virtual void Fire();
 
+	// push request to hosting server
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerFire();
 };

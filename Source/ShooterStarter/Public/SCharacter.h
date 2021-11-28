@@ -58,6 +58,7 @@ protected:
 	void BeginADS(); 
 	void StopADS();
 
+	UPROPERTY(Replicated)
 	ASWeapon* CurrentWeapon;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player")

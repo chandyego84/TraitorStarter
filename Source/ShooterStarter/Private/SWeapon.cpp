@@ -9,6 +9,7 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "ShooterStarter/ShooterStarter.h"
+#include "Net/UnrealNetwork.h"
 
 /*used for drawing debug line only if called in console*/
 static int32 DebugWeaponDrawing = 0;
@@ -28,6 +29,12 @@ ASWeapon::ASWeapon()
 
 	MuzzleSocketName = "MuzzleSocket";
 	TracerTargetName = "Target";
+
+	SetReplicates(true); // spawn on server, will spawn on clients
+
+	// for networking delays -- just like CounterStrike
+	NetUpdateFrequency = 66.0f;
+	MinNetUpdateFrequency = 33.0f;
 }
 
 //// Called when the game starts or when spawned
@@ -38,7 +45,11 @@ ASWeapon::ASWeapon()
 //}
 
 void ASWeapon::Fire() {
-	// Trace the world from pawn eyes to crosshair location
+	if (!HasAuthority()) {
+		// only call if ServerFire() if caller does not have authority
+		// is a client
+		ServerFire();
+	}
 
 	AActor* MyOwner = GetOwner();
 	if (MyOwner) {
@@ -60,6 +71,9 @@ void ASWeapon::Fire() {
 		// Particle "Target" parameter
 		FVector TracerEndPoint = TraceEnd;
 
+		// SurfaceType only overrided if actually hit something
+		EPhysicalSurface SurfaceType = SurfaceType_Default;
+
 		FHitResult Hit; // struct - filled w/ data about what we're hitting
 		// returns boolean (if we hit something -- blocking hit)
 		if (GetWorld()->LineTraceSingleByChannel(Hit, EyeLocation, TraceEnd, COLLISION_WEAPON, QueryParams)) {
@@ -70,24 +84,12 @@ void ASWeapon::Fire() {
 				this, DamageType);
 
 			// get surface type of object hit (body/head/other)
-			EPhysicalSurface SurfaceType = UPhysicalMaterial::DetermineSurfaceType(Hit.PhysMaterial.Get());
-			UParticleSystem* SelectedEffect = nullptr;
+			SurfaceType = UPhysicalMaterial::DetermineSurfaceType(Hit.PhysMaterial.Get());
 
-			switch (SurfaceType) {
-			case (SURFACE_FLESHDEFAULT):
-			case (SURFACE_FLESHVULNERABLE):
-				SelectedEffect = FleshImpactEffect;
-				break;
-			default:
-				SelectedEffect = DefaultImpactEffect;
-				break;
-			}
-
-			if (SelectedEffect) {
-				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), SelectedEffect, Hit.ImpactPoint, Hit.ImpactNormal.Rotation());
-			}
+			PlayImpactEffects(SurfaceType, Hit.ImpactPoint);
 
 			TracerEndPoint = Hit.ImpactPoint;
+
 		}
 
 		if (DebugWeaponDrawing > 0) {
@@ -97,7 +99,28 @@ void ASWeapon::Fire() {
 		// Muzzle/Tracer Effects
 		PlayFireEffect(TracerEndPoint);
 		
+		if (HasAuthority()) {
+			// replicate
+			HitScanTrace.TraceEnd = TracerEndPoint;
+			HitScanTrace.SurfaceType = SurfaceType;
+		}
 	}
+}
+
+// play FX
+void ASWeapon::OnRep_HitScanTrace() {
+	PlayFireEffect(HitScanTrace.TraceEnd);
+	PlayImpactEffects(HitScanTrace.SurfaceType, HitScanTrace.TraceEnd);
+}
+
+// request to the server
+void ASWeapon::ServerFire_Implementation() {
+	Fire();
+}
+
+bool ASWeapon::ServerFire_Validate() {
+	// if was false - client who called is disconnected...don't wannad do that though lol
+	return true;
 }
 
 void ASWeapon::PlayFireEffect(FVector TracerEndPoint) {
@@ -122,6 +145,39 @@ void ASWeapon::PlayFireEffect(FVector TracerEndPoint) {
 			PC->ClientStartCameraShake(FireCamShake);
 		}
 	}
+}
+
+void ASWeapon::PlayImpactEffects(EPhysicalSurface SurfaceType, FVector ImpactPoint) {
+	UParticleSystem* SelectedEffect = nullptr;
+
+	switch (SurfaceType) {
+	case (SURFACE_FLESHDEFAULT):
+	case (SURFACE_FLESHVULNERABLE):
+		SelectedEffect = FleshImpactEffect;
+		break;
+	default:
+		SelectedEffect = DefaultImpactEffect;
+		break;
+	}
+
+	if (SelectedEffect) {
+		FVector MuzzleLocation = MeshComp->GetSocketLocation(MuzzleSocketName);
+		FVector ShotDirection = ImpactPoint - MuzzleLocation;
+		ShotDirection.Normalize();
+
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), SelectedEffect, ImpactPoint, ShotDirection.Rotation());
+	}
+
+}
+
+
+void ASWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// do not replicate on owning client (AGAIN -- already executed it)
+	DOREPLIFETIME_CONDITION(ASWeapon, HitScanTrace, COND_SkipOwner); // replicate to any relavant client connected
+	//DOREPLIFETIME(ASWeapon, HitScanTrace); // replicate to any relavant client connected
+
 }
 
 

@@ -9,6 +9,7 @@
 #include "Components/CapsuleComponent.h"
 #include "SWeapon.h"
 #include "Components/SHealthComponent.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -49,22 +50,24 @@ void ASCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 	defaultFOV = CameraComp->FieldOfView;
-
-	// spawn default weapon
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-
-	CurrentWeapon = GetWorld()->SpawnActor<ASWeapon>(StarterWeaponClass,
-		FVector::ZeroVector, FRotator::ZeroRotator);
-	if (CurrentWeapon) {
-		CurrentWeapon->SetOwner(this);
-		CurrentWeapon->AttachToComponent(GetMesh(),
-			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
-			WeaponAttachSocketName);
-	}
-
 	// creating onhealthchanged fxn
 	HealthComp->OnHealthChanged.AddDynamic(this, &ASCharacter::OnHealthChanged);
+
+	if (HasAuthority()) {
+		// only if running on a server
+		// spawn default weapon
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+		CurrentWeapon = GetWorld()->SpawnActor<ASWeapon>(StarterWeaponClass,
+			FVector::ZeroVector, FRotator::ZeroRotator);
+		if (CurrentWeapon) {
+			CurrentWeapon->SetOwner(this);
+			CurrentWeapon->AttachToComponent(GetMesh(),
+				FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+				WeaponAttachSocketName);
+		}
+	}
 }
 
 // WASD movement
@@ -179,4 +182,11 @@ FVector ASCharacter::GetPawnViewLocation() const {
 
 	// else: calls original implementation [get viewpoint from PAWN eyes]
 	return Super::GetPawnViewLocation();
+}
+
+// specify what exactly we want to replicate + how to replicate it
+void ASCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ASCharacter, CurrentWeapon); // replicate to any relavant client connected
 }
