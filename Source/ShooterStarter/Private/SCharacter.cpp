@@ -188,5 +188,7 @@ FVector ASCharacter::GetPawnViewLocation() const {
 void ASCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(ASCharacter, CurrentWeapon); // replicate to any relavant client connected
+	// replicate to any relavant client connected
+	DOREPLIFETIME(ASCharacter, CurrentWeapon);
+	DOREPLIFETIME(ASCharacter, isDead); 
 }
