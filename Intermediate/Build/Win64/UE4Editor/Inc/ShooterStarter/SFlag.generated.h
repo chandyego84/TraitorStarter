@@ -8,14 +8,25 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UPrimitiveComponent;
+class AActor;
+struct FHitResult;
 #ifdef SHOOTERSTARTER_SFlag_generated_h
 #error "SFlag.generated.h already included, missing '#pragma once' in SFlag.h"
 #endif
 #define SHOOTERSTARTER_SFlag_generated_h
 
 #define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_SPARSE_DATA
-#define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_RPC_WRAPPERS
-#define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_RPC_WRAPPERS_NO_PURE_DECLS
+#define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execOnPlayerEnterPickUpBox);
+
+
+#define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execOnPlayerEnterPickUpBox);
+
+
 #define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesASFlag(); \
@@ -58,7 +69,12 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ASFlag)
 
 
-#define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_PRIVATE_PROPERTY_OFFSET
+#define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__MeshComp() { return STRUCT_OFFSET(ASFlag, MeshComp); } \
+	FORCEINLINE static uint32 __PPO__PickupRoot() { return STRUCT_OFFSET(ASFlag, PickupRoot); } \
+	FORCEINLINE static uint32 __PPO__PickupBox() { return STRUCT_OFFSET(ASFlag, PickupBox); }
+
+
 #define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_9_PROLOG
 #define ShooterStarter_Source_ShooterStarter_Public_SFlag_h_12_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

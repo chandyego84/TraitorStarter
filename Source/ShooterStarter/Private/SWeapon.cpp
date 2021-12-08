@@ -32,7 +32,7 @@ ASWeapon::ASWeapon()
 
 	SetReplicates(true); // spawn on server, will spawn on clients
 
-	// for networking delays -- just like CounterStrike
+	// for networking delays
 	NetUpdateFrequency = 66.0f;
 	MinNetUpdateFrequency = 33.0f;
 }
