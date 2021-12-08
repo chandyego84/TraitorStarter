@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "SFlag.generated.h"
 
+class ASCharacter;
+
 UCLASS()
 class SHOOTERSTARTER_API ASFlag : public AActor
 {
@@ -29,6 +31,12 @@ protected:
 	UPROPERTY(EditAnywhere)
 	UShapeComponent* PickupBox;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = "Equip")
+	FName FlagAttachSocketName;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Owner")
+	ASCharacter* FlagOwner;
+
 	UFUNCTION()
 		void OnPlayerEnterPickUpBox(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 			UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
@@ -38,4 +46,6 @@ public:
 	// Called every frame
 	//virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Pickup Status")
+		bool PickedUp;
 };

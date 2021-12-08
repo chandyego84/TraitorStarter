@@ -35,37 +35,37 @@ protected:
 
 	/*CAMERA AND SPRINGARM COMP*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UCameraComponent* CameraComp;
+		UCameraComponent* CameraComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	USpringArmComponent* SpringArmComp;
+		USpringArmComponent* SpringArmComp;
 
 	// HEALTH COMP
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	USHealthComponent* HealthComp;
+		USHealthComponent* HealthComp;
 
 	// for ADS
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
-	float zoomFOV;
+		float zoomFOV;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player", meta = (ClampMin = 0.0, ClampMax = 100))
-	float ZoomInterpSpeed; // should only be btwn 0-->100
+		float ZoomInterpSpeed; // should only be btwn 0-->100
 
 	float defaultFOV; // begin play
 
 	bool isZooming;
 
-	void BeginADS(); 
+	void BeginADS();
 	void StopADS();
 
 	UPROPERTY(Replicated)
-	ASWeapon* CurrentWeapon;
+		ASWeapon* CurrentWeapon;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
-	TSubclassOf<ASWeapon>StarterWeaponClass;
+		TSubclassOf<ASWeapon>StarterWeaponClass;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Player")
-	FName WeaponAttachSocketName;
+		FName WeaponAttachSocketName;
 
 	// AMMO 
 	UPROPERTY(EditDefaultsOnly, Category = "Ammo")
@@ -82,9 +82,12 @@ protected:
 			const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Player")
-	bool isDead;
+		bool isDead;
 
-public:	
+	// FLAG 
+
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -95,6 +98,6 @@ public:
 	virtual FVector GetPawnViewLocation() const override;
 
 	UFUNCTION(BlueprintCallable, Category = "Player")
-	void Fire();
+		void Fire();
 
 };

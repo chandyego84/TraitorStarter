@@ -5,6 +5,7 @@
 #include "Components/ShapeComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "SCharacter.h"
 
 // Sets default values
 ASFlag::ASFlag()
@@ -23,6 +24,8 @@ ASFlag::ASFlag()
 	PickupBox->OnComponentBeginOverlap.AddDynamic(this, &ASFlag::OnPlayerEnterPickUpBox);
 	PickupBox->AttachToComponent(PickupRoot, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 	
+	FlagAttachSocketName = "FlagSocket";
+
 	SetReplicates(true); // spawn on server, will spawn on clients
 }
 
@@ -34,7 +37,15 @@ void ASFlag::BeginPlay()
 }
 
 void ASFlag::OnPlayerEnterPickUpBox(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	Destroy();
+	PickedUp = true;
+
+	FlagOwner = Cast<ASCharacter>(OtherActor); //typecasting AActor* to ASCharacter
+	if (FlagOwner) {
+		SetOwner(FlagOwner);
+		AttachToComponent(FlagOwner->GetMesh(),
+			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+			FlagAttachSocketName);
+	}
 }
 
 //// Called every frame

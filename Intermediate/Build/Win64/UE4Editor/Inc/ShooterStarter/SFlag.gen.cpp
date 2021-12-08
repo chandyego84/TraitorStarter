@@ -23,6 +23,7 @@ void EmptyLinkFunctionForGeneratedCodeSFlag() {}
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UShapeComponent_NoRegister();
+	SHOOTERSTARTER_API UClass* Z_Construct_UClass_ASCharacter_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(ASFlag::execOnPlayerEnterPickUpBox)
 	{
@@ -149,6 +150,19 @@ void EmptyLinkFunctionForGeneratedCodeSFlag() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PickupBox_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PickupBox;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_FlagAttachSocketName_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FNamePropertyParams NewProp_FlagAttachSocketName;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_FlagOwner_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_FlagOwner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PickedUp_MetaData[];
+#endif
+		static void NewProp_PickedUp_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_PickedUp;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -192,10 +206,40 @@ void EmptyLinkFunctionForGeneratedCodeSFlag() {}
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASFlag_Statics::NewProp_PickupBox = { "PickupBox", nullptr, (EPropertyFlags)0x0020080000080009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ASFlag, PickupBox), Z_Construct_UClass_UShapeComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ASFlag_Statics::NewProp_PickupBox_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASFlag_Statics::NewProp_PickupBox_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASFlag_Statics::NewProp_FlagAttachSocketName_MetaData[] = {
+		{ "Category", "Equip" },
+		{ "ModuleRelativePath", "Public/SFlag.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FNamePropertyParams Z_Construct_UClass_ASFlag_Statics::NewProp_FlagAttachSocketName = { "FlagAttachSocketName", nullptr, (EPropertyFlags)0x0020080000030001, UE4CodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ASFlag, FlagAttachSocketName), METADATA_PARAMS(Z_Construct_UClass_ASFlag_Statics::NewProp_FlagAttachSocketName_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASFlag_Statics::NewProp_FlagAttachSocketName_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASFlag_Statics::NewProp_FlagOwner_MetaData[] = {
+		{ "Category", "Owner" },
+		{ "ModuleRelativePath", "Public/SFlag.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASFlag_Statics::NewProp_FlagOwner = { "FlagOwner", nullptr, (EPropertyFlags)0x0020080000030001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ASFlag, FlagOwner), Z_Construct_UClass_ASCharacter_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ASFlag_Statics::NewProp_FlagOwner_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASFlag_Statics::NewProp_FlagOwner_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp_MetaData[] = {
+		{ "Category", "Pickup Status" },
+		{ "Comment", "// Called every frame\n//virtual void Tick(float DeltaTime) override;\n" },
+		{ "ModuleRelativePath", "Public/SFlag.h" },
+		{ "ToolTip", "Called every frame\nvirtual void Tick(float DeltaTime) override;" },
+	};
+#endif
+	void Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp_SetBit(void* Obj)
+	{
+		((ASFlag*)Obj)->PickedUp = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp = { "PickedUp", nullptr, (EPropertyFlags)0x0010000000010001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ASFlag), &Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp_SetBit, METADATA_PARAMS(Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASFlag_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASFlag_Statics::NewProp_MeshComp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASFlag_Statics::NewProp_PickupRoot,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASFlag_Statics::NewProp_PickupBox,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASFlag_Statics::NewProp_FlagAttachSocketName,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASFlag_Statics::NewProp_FlagOwner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASFlag_Statics::NewProp_PickedUp,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ASFlag_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ASFlag>::IsAbstract,
@@ -224,7 +268,7 @@ void EmptyLinkFunctionForGeneratedCodeSFlag() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ASFlag, 3233899158);
+	IMPLEMENT_CLASS(ASFlag, 2748170315);
 	template<> SHOOTERSTARTER_API UClass* StaticClass<ASFlag>()
 	{
 		return ASFlag::StaticClass();

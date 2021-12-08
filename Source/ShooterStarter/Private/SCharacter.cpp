@@ -14,7 +14,7 @@
 // Sets default values
 ASCharacter::ASCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// spring arm component
@@ -48,7 +48,7 @@ ASCharacter::ASCharacter()
 void ASCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	defaultFOV = CameraComp->FieldOfView;
 	// creating onhealthchanged fxn
 	HealthComp->OnHealthChanged.AddDynamic(this, &ASCharacter::OnHealthChanged);
@@ -119,7 +119,7 @@ void ASCharacter::Fire() {
 		}
 
 	}
-} 
+}
 
 void ASCharacter::OnHealthChanged(USHealthComponent* OwnerHealthComp, float Health, float HealthDelta,
 	const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser) {
@@ -190,5 +190,5 @@ void ASCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifet
 
 	// replicate to any relavant client connected
 	DOREPLIFETIME(ASCharacter, CurrentWeapon);
-	DOREPLIFETIME(ASCharacter, isDead); 
+	DOREPLIFETIME(ASCharacter, isDead);
 }
