@@ -1,0 +1,3 @@
+C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Intermediate\Build\Win64\UE4Editor\Development\ShooterStarter\Definitions.ShooterStarter.h
+C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Source\ShooterStarter\Public\SFlag.h
+C:\Users\chand\Documents\Unreal Projects\ShooterStarter\Intermediate\Build\Win64\UE4Editor\Inc\ShooterStarter\SFlag.generated.h
