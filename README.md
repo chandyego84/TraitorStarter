@@ -6,5 +6,25 @@ to simplify my game idea and hopefully build on it for the "Among Us"-based game
 
 ### Game Concept:
 
-You are to go against another player in a Capture the Flag game, and you each have a pistol but with just one bullet. The players can use the pistol anytime during a round, and if
+You are to go against another player in a Capture the Flag game, and you each have a gun but with just one bullet. The players can use the pistol anytime during a round, and if
 they hit the opposing player their speed will slow down--a headshot is an instant kill/win. 
+
+TODOs (post-semester):
+
+## Multiplayer:
+* Currently only able to be packaged and sent to another person's IP
+- [ ] Create actual teams for MP
+- [ ] Set up MP dedicated server instead of packaging
+
+## Features:
+- [ ] HUD
+- [ ] Rounds/scores
+- [ ] SFX
+
+## Gameplay:
+- [ ] Character slowdown when shot
+- [ ] More gamemodes (> 2 players)
+- [ ] Pass/throw flag (> 2 players)
+
+## Graphics:
+- [ ] Create own sci-fi pistol/guns (learn Blender/PS)
