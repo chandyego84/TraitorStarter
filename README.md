@@ -9,7 +9,7 @@ to simplify my game idea and hopefully build on it for the "Among Us"-based game
 You are to go against another player in a Capture the Flag game, and you each have a gun but with just one bullet. The players can use the pistol anytime during a round, and if
 they hit the opposing player their speed will slow down--a headshot is an instant kill/win. 
 
-TODOs (post-semester):
+#TODOs (post-semester):
 
 ## Multiplayer:
 * Currently only able to be packaged and sent to another person's IP
