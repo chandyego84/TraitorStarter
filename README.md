@@ -1,4 +1,4 @@
-# Traitor
+# Capture the Flag
 ## CptS 122: Project Assignment 9
 **Background:** This project is my first time using the Unreal Engine. My plan was to create a 3D version of "Among Us" with some extra functionality/style of my own added to it,
 but I realized that will take more time than I have for this assignment. After spending days reading guides/forums/documentation and watching tutorials/how-tos, I've decided
@@ -23,7 +23,7 @@ they hit the opposing player their speed will slow down--a headshot is an instan
 
 ## Gameplay:
 - [ ] Character slowdown when shot
-- [ ] More gamemodes (> 2 players)
+- [ ] More gamemodes (> 2 players, hostage type CTF)
 - [ ] Pass/throw flag (> 2 players)
 
 ## Graphics:
